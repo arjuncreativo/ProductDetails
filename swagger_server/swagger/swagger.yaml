@@ -1,0 +1,114 @@
+---
+swagger: "2.0"
+info:
+  description: "This is a sample  RESTful service that can retrieve product and price\
+    \ details by ID."
+  version: "1.0.0"
+  title: "myRetail"
+  termsOfService: "http://myretails.io/terms/"
+  contact:
+    email: "apiteam@myretail.io"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "localhost:8090"
+basePath: "/v2"
+tags:
+- name: "Products"
+  description: "Everything about MyRetail Products"
+schemes:
+- "https"
+- "http"
+paths:
+  /products/{id}/:
+    get:
+      tags:
+      - "Products"
+      summary: "Find Product by ID"
+      description: "Returns a Product Details"
+      operationId: "get_product_by_id"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of Product to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Product"
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Product not found"
+      x-swagger-router-controller: "swagger_server.controllers.products_controller"
+    put:
+      tags:
+      - "Products"
+      summary: "Updates a Product in the store with form data"
+      description: ""
+      operationId: "update_product"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of Product that needs to be updated"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        description: "Updated user object"
+        required: true
+        schema:
+          $ref: "#/definitions/Price" 
+      responses:
+        "200":
+          description: "successful operation"
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Product not found"
+      x-swagger-router-controller: "swagger_server.controllers.products_controller"    
+definitions:
+  Price:
+    type: "object"
+    required:
+    - "currency_code"
+    - "value"
+    properties:
+      value:
+        type: "number"
+        format: "int64"
+      currency_code:
+        type: "string"
+        example: "USD"
+    example:
+      value: 20.0
+      currency_code: "USD"
+  Product:
+    type: "object"
+    required:
+    - "id"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+        example: "The Big Lebowski (Blu-ray)"
+      current_price:
+        $ref: "#/definitions/Price"
+    example:
+      name: "The Big Lebowski (Blu-ray)"
+      id: 13860428
+      current_price:
+        value: 20.00
+        currency_code: "USD"
