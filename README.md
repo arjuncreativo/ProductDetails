@@ -22,6 +22,22 @@ As LRU cache does is just python memmory caching, it does not proved the support
 
 ## Usage
 
+### Curl Request to Update the price
+
+curl --location --request PUT 'http://localhost:8090/v2/products/13860428' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "value": 21,
+  "currency_code": "USD"
+}'
+
+### Curl Request to get the price 
+
+
+curl --location --request GET 'http://localhost:8090/v2/products/13860428'
+
+
+
 
 ## Running with Docker
 
