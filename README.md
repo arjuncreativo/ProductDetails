@@ -14,9 +14,9 @@ This example uses the [Connexion](https://github.com/zalando/connexion) library 
 Python 3.5.2+
 
 ## Exceptions
-As ap part of POC this project uses python LRU caching to cache the Results of API. This can be replaced with in memmory caching tools like Redis or Memcached
+As a part of POC this project uses python LRU caching to cache the Results of API. This can be replaced with in memmory caching tools like Redis or Memcached
 
-As LRU cache does is just python memmory caching, it does not proved the support to clear an item by a id or pointer. So on price update the entire cache will be cleared. This can be fixed in production using memory object caching
+LRU cache is just python memmory caching, it does not provide the feature to clear cache by an item id or pointer. So on price update the entire cache will be cleared. This can be fixed in production using memory object caching
 
 
 
